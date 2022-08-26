@@ -45,11 +45,13 @@ public class ProductController {
 		return ResponseEntity.ok().body(ProductDto.transformProductDto(list));
 	}
 	@GetMapping("/search")
-	public List<Product> findProduct(
+	public ResponseEntity<List<ProductDto>> search(
 			@RequestParam(value="minPrice", required = false) BigDecimal minPrice,
 			@RequestParam(value="maxPrice", required = false) BigDecimal maxPrice,
 			@RequestParam(value="name", required = false ) String name){
-		return service.findProduct(minPrice, maxPrice, name);
+
+		List<Product> findProducts = service.search (minPrice, maxPrice, name);
+		return ResponseEntity.ok(ProductDto.transformProductDto(findProducts));
 	}
 	@PostMapping
 	public ResponseEntity<ProductDto> create(@RequestBody ProductDto obj){
@@ -58,9 +60,10 @@ public class ProductController {
 		return ResponseEntity.created(uri).build();
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody ProductDto productDto) {
+	public ResponseEntity<ProductDto> update(@PathVariable Long id, @RequestBody ProductDto productDto) {
 		Product newObj = service.update(id, productDto);
-		return ResponseEntity.ok().body(newObj);
+		newObj.setId(id);
+		return ResponseEntity.ok().body(new ProductDto(newObj));
 	}
 	@DeleteMapping(value ="/{id}")
 	public ResponseEntity<Object> deleteById(@PathVariable Long id) {

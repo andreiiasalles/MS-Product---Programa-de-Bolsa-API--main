@@ -40,6 +40,26 @@ public class ProductDto extends Product {
 		return name;
 	}
 
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
 	public BigDecimal getPrice() {
 		return price;
 	}

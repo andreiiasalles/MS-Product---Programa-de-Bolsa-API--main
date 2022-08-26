@@ -1,4 +1,3 @@
-package br.com.ms.product.test;/*
 package br.com.ms.product.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,7 +37,7 @@ class ProductServiceTest {
     public static final String DESCRIPTION = "Celular Caro";
     public static final BigDecimal PRICE = new BigDecimal (10.0);
 	
-	Autowired
+	@Autowired 
 	private ProductService productService;
 
 	@Mock
