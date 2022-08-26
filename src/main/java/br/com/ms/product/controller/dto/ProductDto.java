@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import br.com.ms.product.entity.Product;
 
-public class ProductDto {
+public class ProductDto extends Product {
 
 	private Long id;
 	private String name;

@@ -2,10 +2,13 @@ package br.com.ms.product.service;
 
 import br.com.ms.product.controller.dto.ProductDto;
 import br.com.ms.product.entity.Product;
+import br.com.ms.product.exceptions.MethodArgumentNotValidException;
 import br.com.ms.product.exceptions.ObjectNotFoundException;
 import br.com.ms.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -20,14 +23,19 @@ public class ProductService {
 	public Product findById(Long id){
 		Optional<Product> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Object not found!" + id +", Tipo: " + Product.class.getName()));
+				"Object not found! " + id ));
 	}
 	public List<Product> findAll() {
-		return repository.findAll();
+		return Optional.ofNullable(repository.findAll()).orElseThrow(() -> new ObjectNotFoundException(
+				"Object not found!" ));
 	}
 	public Product create(ProductDto obj) {
+		if (obj.getName() == null || obj.getDescription() == null || obj.getPrice() == null){
+			throw new MethodArgumentNotValidException( "The field cannot be blank.");
+		}
 		Product transformProductDto = new Product(obj);
-		return repository.save(transformProductDto );
+		repository.save(transformProductDto );
+		return obj;
 	}
 
 	public Product update(Long id, ProductDto productDto) {
