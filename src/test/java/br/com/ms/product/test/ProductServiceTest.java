@@ -11,10 +11,8 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import br.com.ms.product.exceptions.ObjectNotFoundException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.Assert;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
