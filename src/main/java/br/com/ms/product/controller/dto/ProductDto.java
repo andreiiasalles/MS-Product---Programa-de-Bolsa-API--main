@@ -13,6 +13,7 @@ public class ProductDto extends Product {
 	private String description;
 	private BigDecimal price;
 
+	public ProductDto(){}
 	public ProductDto(Long id, String name, String description, BigDecimal price) {
 		this.id = id;
 		this.name = name;
