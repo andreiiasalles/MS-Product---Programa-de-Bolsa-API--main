@@ -31,7 +31,8 @@ public class ProductService {
 	}
 
 	public Product create(ProductDto obj) {
-		if (obj.getName() == null || obj.getDescription() == null || obj.getPrice() == null) {
+		if (obj.getName() == null || obj.getDescription() == null || obj.getPrice() == null ||
+				obj.getName() == "" || obj.getDescription() == ""|| obj.getPrice().equals(0.0)) {
 			throw new MethodArgumentNotValidException("The field cannot be blank.");
 		}
 		Product transformProductDto = new Product(obj);
@@ -41,7 +42,8 @@ public class ProductService {
 
 	public Product update(Long id, ProductDto newObj) {
 		Product Obj = findById(id);
-		if (newObj.getName() == null || newObj.getDescription() == null || newObj.getPrice() == null) {
+		if (newObj.getName() == null || newObj.getDescription() == null || newObj.getPrice() == null ||
+				newObj.getName() == "" || newObj.getDescription() == ""|| newObj.getPrice().equals(0.0)) {
 			throw new MethodArgumentNotValidException("The field cannot be blank.");
 		}
 		Obj.setName(newObj.getName());

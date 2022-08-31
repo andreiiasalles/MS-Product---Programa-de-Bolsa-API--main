@@ -4,6 +4,7 @@ import br.com.ms.product.controller.dto.ProductDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -11,17 +12,21 @@ import java.util.Objects;
 public class Product {
 
 	@Id
+	@NotNull
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotEmpty(message = "Name field is required.")
+	@NotNull
 	@Column(nullable = false)
 	private String name;
 	@NotEmpty(message = "Description field is required.")
+	@NotNull
 	@Column(nullable = false)
 	private String description;
 
 	@NotEmpty(message = "Price field is required.")
+	@NotNull
 	@Column(nullable = false)
 	private BigDecimal price;
 

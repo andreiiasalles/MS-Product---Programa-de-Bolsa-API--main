@@ -6,11 +6,24 @@ import java.util.stream.Collectors;
 
 import br.com.ms.product.entity.Product;
 
+import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class ProductDto extends Product {
 
 	private Long id;
+	@NotEmpty(message = "Name field is required.")
+	@NotNull
+	@Column(nullable = false)
 	private String name;
+	@NotEmpty(message = "Description field is required.")
+	@NotNull
+	@Column(nullable = false)
 	private String description;
+	@NotEmpty(message = "Price field is required.")
+	@NotNull
+	@Column(nullable = false)
 	private BigDecimal price;
 
 	public ProductDto(){}
