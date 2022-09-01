@@ -6,6 +6,8 @@ import br.com.ms.product.exceptions.MethodArgumentNotValidException;
 import br.com.ms.product.exceptions.ObjectNotFoundException;
 import br.com.ms.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -25,8 +27,8 @@ public class ProductService {
 				"Object not found! " + id));
 	}
 
-	public List<Product> findAll() {
-		return Optional.ofNullable(repository.findAll()).orElseThrow(() -> new ObjectNotFoundException(
+	public Page<Product> findAll(Pageable pagination) {
+		return Optional.ofNullable(repository.findAll(pagination)).orElseThrow(() -> new ObjectNotFoundException(
 				"Object not found!"));
 	}
 
@@ -60,8 +62,8 @@ public class ProductService {
 		repository.deleteById(id);
 	}
 
-	public List<Product> search(BigDecimal minPrice, BigDecimal maxPrice, String name) {
-		List<Product> findProducts = repository.findProduct(minPrice, maxPrice, name);
+	public Page<Product> search(Pageable pagination, BigDecimal minPrice, BigDecimal maxPrice, String name) {
+		Page<Product> findProducts = repository.findProduct(pagination, minPrice, maxPrice, name);
 		if (findProducts.isEmpty()) {
 			throw new ObjectNotFoundException("Products not found");
 		}

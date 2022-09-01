@@ -8,6 +8,10 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -38,20 +42,23 @@ public class ProductController {
 	}
 	@GetMapping
 	@ApiOperation(value="Return products list.")
-	public ResponseEntity<List<ProductDto>> findAll(){
-		List<Product> list = service.findAll();
-		return ResponseEntity.ok().body(ProductDto.transformProductDto(list));
+	public ResponseEntity<Page<ProductDto>> findAll(@PageableDefault(page = 0, size = 3) Pageable pagination){
+
+		Page<Product> listOfAllWithPageParam = service.findAll(pagination);
+		return ResponseEntity.ok().body(ProductDto.transformProductDto(listOfAllWithPageParam));
 	}
 	@GetMapping("/search")
 	@ApiOperation(value="Return products price minimum and maximo and name.")
-	public ResponseEntity<List<ProductDto>> search(
+	public ResponseEntity<Page<ProductDto>> search(
+            @PageableDefault(page = 0, size = 3) Pageable pagination,
 			@RequestParam(value="minPrice", required = false) BigDecimal minPrice,
 			@RequestParam(value="maxPrice", required = false) BigDecimal maxPrice,
 			@RequestParam(value="name", required = false ) String name){
 
-		List<Product> findProducts = service.search (minPrice, maxPrice, name);
+		Page<Product> findProducts = service.search (pagination, minPrice, maxPrice, name);
 		return ResponseEntity.ok(ProductDto.transformProductDto(findProducts));
 	}
+
 	@PostMapping
 	@ApiOperation(value="Create product.")
 	public ResponseEntity<ProductDto> create(@RequestBody ProductDto obj){

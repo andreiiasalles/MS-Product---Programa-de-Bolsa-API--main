@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.ms.product.entity.Product;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
@@ -78,7 +79,8 @@ public class ProductDto extends Product {
 		return price;
 	}
 
-	public static List<ProductDto> transformProductDto(List<Product> products){
-		return products.stream().map(ProductDto::new).collect(Collectors.toList());
+	public static Page<ProductDto> transformProductDto(Page<Product> products){
+		return products.map(ProductDto::new);
+
 	}
 }

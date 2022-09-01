@@ -1,3 +1,12 @@
 INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'iphonex', 5000.00);
 INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'iphonese', 4000.00);
 INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'iphone 12', 6000.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'xiaomi', 10.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'lg', 5.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'sansung', 100.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'iphone6', 1000.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'sonyericson', 40.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'asus', 300.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'iphone 11', 3000.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'windowsfone', 1.00);
+INSERT INTO PRODUCT(name, description, price) VALUES('Celular', 'nokia', 2.00);
